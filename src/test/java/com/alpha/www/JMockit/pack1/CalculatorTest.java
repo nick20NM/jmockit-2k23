@@ -7,26 +7,42 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import mockit.Injectable;
+import mockit.Mock;
+import mockit.MockUp;
 import mockit.Mocked;
 import mockit.Tested;
 
 public class CalculatorTest {
+	
+	@Test
+	@DisplayName("testConstructorMocking")
+	void testConstructorMocking() {
+		new MockUp<Calculator>() {
+			@Mock
+			public void $init(int a, int b) {
+				
+			}
+		};
+		Calculator calculator = new Calculator(1, 1);
+		double result = calculator.performMathOperation("add", 2, 2);
+		assertTrue(result > 0);
+	}
 
 //	@Tested // @Tested -> Calculator calculator = new Calculator();
 //	@Mocked
-	@Injectable
-	Calculator calculator2;
+//	@Injectable
+//	Calculator calculator2;
 //	Calculator calculator;
 
-	@Test
-	@DisplayName("testAdditionOperation")
-	void testAdditionOperation() {
-		calculator2 = new Calculator();
-//		Calculator calculator2 = new Calculator();
-		double result = calculator2.performMathOperation("add", 2, 2);
-//		double result = calculator.performMathOperation("add", 2, 2);
-		assertTrue(result > 0);
-	}
+//	@Test
+//	@DisplayName("testAdditionOperation")
+//	void testAdditionOperation() {
+//		calculator2 = new Calculator();
+////		Calculator calculator2 = new Calculator();
+//		double result = calculator2.performMathOperation("add", 2, 2);
+////		double result = calculator.performMathOperation("add", 2, 2);
+//		assertTrue(result > 0);
+//	}
 //
 //	@Test
 //	@DisplayName("testSubtractionOperation")

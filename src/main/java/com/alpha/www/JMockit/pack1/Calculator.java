@@ -2,6 +2,14 @@ package com.alpha.www.JMockit.pack1;
 
 public class Calculator {
 	
+	int a, b;
+	
+	public Calculator(int a, int b) {
+		super();
+		this.a = a;
+		this.b = b;
+	}
+
 //	public String publicString;
 //	private String privateString;
 //	public final String finalString="finalString";
