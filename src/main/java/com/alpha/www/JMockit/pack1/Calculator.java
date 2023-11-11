@@ -2,12 +2,16 @@ package com.alpha.www.JMockit.pack1;
 
 public class Calculator {
 	
-	int a, b;
+//	int a, b;
+//	
+//	public Calculator(int a, int b) {
+//		super();
+//		this.a = a;
+//		this.b = b;
+//	}
 	
-	public Calculator(int a, int b) {
-		super();
-		this.a = a;
-		this.b = b;
+	public String getUserOperation() {
+		return UserConstants.operationType();
 	}
 
 //	public String publicString;
@@ -31,11 +35,11 @@ public class Calculator {
 
 	public double performMathOperation(String operation, double a, double b) {
 		double result = 0;
-		if (operation.equals("add")) {
+		if (operation.equals(getUserOperation())) {
 			result = new Addition(a, b).performAddition();
-		} else if (operation.equals("sub")) {
+		} else if (operation.equals(getUserOperation())) {
 			result = new Subtraction(a, b).performSubtraction();
-		} else if (operation.equals("mul")) {
+		} else if (operation.equals(getUserOperation())) {
 			result = new Multiplication(a, b).performMultiplication();
 		} else if (operation.equals("div")) {
 			result = new Division(a, b).performDivision();

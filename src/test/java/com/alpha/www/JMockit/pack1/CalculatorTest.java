@@ -14,19 +14,35 @@ import mockit.Tested;
 
 public class CalculatorTest {
 	
+	@Tested
+	Calculator calculator;
+	
 	@Test
-	@DisplayName("testConstructorMocking")
-	void testConstructorMocking() {
-		new MockUp<Calculator>() {
+	@DisplayName("testStaticMethodMocking")
+	void testStaticMethodMocking() {
+		new MockUp<UserConstants>() {
 			@Mock
-			public void $init(int a, int b) {
-				
+			public String operationType() {
+				return "sub";
 			}
 		};
-		Calculator calculator = new Calculator(1, 1);
-		double result = calculator.performMathOperation("add", 2, 2);
-		assertTrue(result > 0);
+		String result = calculator.getUserOperation();
+		assertTrue(result.equals("sub"));
 	}
+	
+//	@Test
+//	@DisplayName("testConstructorMocking")
+//	void testConstructorMocking() {
+//		new MockUp<Calculator>() {
+//			@Mock
+//			public void $init(int a, int b) {
+//				
+//			}
+//		};
+//		Calculator calculator = new Calculator(1, 1);
+//		double result = calculator.performMathOperation("add", 2, 2);
+//		assertTrue(result > 0);
+//	}
 
 //	@Tested // @Tested -> Calculator calculator = new Calculator();
 //	@Mocked
