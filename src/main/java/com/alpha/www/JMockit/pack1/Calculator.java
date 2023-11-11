@@ -10,9 +10,9 @@ public class Calculator {
 //		this.b = b;
 //	}
 	
-	public String getUserOperation() {
-		return UserConstants.operationType();
-	}
+//	public String getUserOperation() {
+//		return UserConstants.operationType();
+//	}
 
 //	public String publicString;
 //	private String privateString;
@@ -35,11 +35,11 @@ public class Calculator {
 
 	public double performMathOperation(String operation, double a, double b) {
 		double result = 0;
-		if (operation.equals(getUserOperation())) {
+		if (operation.equals("add")) {
 			result = new Addition(a, b).performAddition();
-		} else if (operation.equals(getUserOperation())) {
+		} else if (operation.equals("sub")) {
 			result = new Subtraction(a, b).performSubtraction();
-		} else if (operation.equals(getUserOperation())) {
+		} else if (operation.equals("mul")) {
 			result = new Multiplication(a, b).performMultiplication();
 		} else if (operation.equals("div")) {
 			result = new Division(a, b).performDivision();

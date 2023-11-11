@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.stubbing.answers.Returns;
 
+import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mock;
 import mockit.MockUp;
@@ -13,23 +15,50 @@ import mockit.Mocked;
 import mockit.Tested;
 
 public class CalculatorTest {
-	
-	@Tested
+
+	@Mocked
 	Calculator calculator;
-	
+
 	@Test
-	@DisplayName("testStaticMethodMocking")
-	void testStaticMethodMocking() {
-		new MockUp<UserConstants>() {
-			@Mock
-			public String operationType() {
-				return "sub";
+	@DisplayName("testExpectationsBlock")
+	void testExpectationsBlock() {
+		new Expectations() {
+			{
+//				calculator.performMathOperation("add", 10, 10);
+//				result = 1;
+//				calculator.performMathOperation("add", 20, 20);
+//				result = 2;
+//				calculator.performMathOperation("add", 30, 30);
+//				result = 3;
+//				calculator.performMathOperation(anyString, anyDouble, anyDouble);
+//				result = 3;
+				calculator.performMathOperation(anyString, anyDouble, anyDouble);
+				returns(1.0 , 2.0 , 3.0);
 			}
 		};
-		String result = calculator.getUserOperation();
-		assertTrue(result.equals("sub"));
+		double result1 = calculator.performMathOperation("add", 10.0, 10.0);
+		assertTrue(result1 > 0);
+		
+		double result2 = calculator.performMathOperation("add", 20.0, 20.0);
+		assertTrue(result2 > 0);
+		
+		double result3 = calculator.performMathOperation("add", 30.0, 30.0);
+		assertTrue(result3 > 0);
 	}
-	
+
+//	@Test
+//	@DisplayName("testStaticMethodMocking")
+//	void testStaticMethodMocking() {
+//		new MockUp<UserConstants>() {
+//			@Mock
+//			public String operationType() {
+//				return "sub";
+//			}
+//		};
+//		String result = calculator.getUserOperation();
+//		assertTrue(result.equals("sub"));
+//	}
+
 //	@Test
 //	@DisplayName("testConstructorMocking")
 //	void testConstructorMocking() {
