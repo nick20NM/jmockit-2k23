@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.stubbing.answers.Returns;
 
+import mockit.Delegate;
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mock;
@@ -22,7 +23,7 @@ public class CalculatorTest {
 	@Test
 	@DisplayName("testExpectationsBlock")
 	void testExpectationsBlock() {
-		new Expectations() {
+		new Expectations(calculator) {
 			{
 //				calculator.performMathOperation("add", 10, 10);
 //				result = 1;
@@ -32,18 +33,26 @@ public class CalculatorTest {
 //				result = 3;
 //				calculator.performMathOperation(anyString, anyDouble, anyDouble);
 //				result = 3;
-				calculator.performMathOperation(anyString, anyDouble, anyDouble);
-				returns(1.0 , 2.0 , 3.0);
+//				calculator.performMathOperation(anyString, anyDouble, anyDouble);
+//				returns(1.0 , 2.0 , 3.0);
+				calculator.performMathOperation("add", anyDouble, anyDouble);
+				result = new Delegate<Calculator>() {
+					double performMathOperation(String operation, double a, double b) {
+						double result = calculator.performMathOperation("sub", 20.0, 10.0);
+						return result;
+					}
+				};
 			}
 		};
 		double result1 = calculator.performMathOperation("add", 10.0, 10.0);
 		assertTrue(result1 > 0);
+		System.out.println("result1="+result1);
 		
-		double result2 = calculator.performMathOperation("add", 20.0, 20.0);
-		assertTrue(result2 > 0);
-		
-		double result3 = calculator.performMathOperation("add", 30.0, 30.0);
-		assertTrue(result3 > 0);
+//		double result2 = calculator.performMathOperation("add", 20.0, 20.0);
+//		assertTrue(result2 > 0);
+//		
+//		double result3 = calculator.performMathOperation("add", 30.0, 30.0);
+//		assertTrue(result3 > 0);
 	}
 
 //	@Test

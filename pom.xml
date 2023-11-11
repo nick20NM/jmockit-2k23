@@ -31,19 +31,19 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jmockit/jmockit -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.jmockit</groupId>
 			<artifactId>jmockit</artifactId>
 			<version>1.49</version>
 			<scope>test</scope>
-		</dependency> -->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.github.hazendaz.jmockit/jmockit -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.github.hazendaz.jmockit</groupId>
 			<artifactId>jmockit</artifactId>
 			<version>1.51.0</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>
