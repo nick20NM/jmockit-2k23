@@ -26,7 +26,13 @@ public class CalculatorTest {
 	@Test
 	@DisplayName("testFakeAdditionClass")
 	void testFakeAdditionClass() {
-		new FakeAdditionClass();
+//		new FakeAdditionClass();
+		new MockUp<Addition>() {
+			@Mock
+			public double performAddition(double a, double b) {
+				return 100;
+			}
+		};
 		double result = calculator.performMathOperation("add", 2, 2);
 		assertTrue(result > 0);
 	}
