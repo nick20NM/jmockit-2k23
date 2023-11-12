@@ -9,51 +9,92 @@ import org.mockito.internal.stubbing.answers.Returns;
 
 import mockit.Delegate;
 import mockit.Expectations;
+import mockit.FullVerifications;
 import mockit.Injectable;
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.Mocked;
 import mockit.Tested;
+import mockit.Verifications;
+import mockit.VerificationsInOrder;
 
 public class CalculatorTest {
-
+	
 	@Mocked
 	Calculator calculator;
-
+	
 	@Test
-	@DisplayName("testExpectationsBlock")
-	void testExpectationsBlock() {
-		new Expectations(calculator) {
-			{
-//				calculator.performMathOperation("add", 10, 10);
-//				result = 1;
-//				calculator.performMathOperation("add", 20, 20);
-//				result = 2;
-//				calculator.performMathOperation("add", 30, 30);
-//				result = 3;
-//				calculator.performMathOperation(anyString, anyDouble, anyDouble);
-//				result = 3;
-//				calculator.performMathOperation(anyString, anyDouble, anyDouble);
-//				returns(1.0 , 2.0 , 3.0);
-				calculator.performMathOperation("add", anyDouble, anyDouble);
-				result = new Delegate<Calculator>() {
-					double performMathOperation(String operation, double a, double b) {
-						double result = calculator.performMathOperation("sub", 20.0, 10.0);
-						return result;
-					}
-				};
-			}
-		};
-		double result1 = calculator.performMathOperation("add", 10.0, 10.0);
-		assertTrue(result1 > 0);
-		System.out.println("result1="+result1);
+	@DisplayName("testVerificationsBlock")
+	void testVerificationsBlock() {
 		
-//		double result2 = calculator.performMathOperation("add", 20.0, 20.0);
-//		assertTrue(result2 > 0);
-//		
-//		double result3 = calculator.performMathOperation("add", 30.0, 30.0);
-//		assertTrue(result3 > 0);
+		boolean checkForNull = Calculator.checkForNull(2, 2);
+		assertTrue(!checkForNull);
+		double result = calculator.performMathOperation("add", 2, 2);
+		assertTrue(result==0);
+		
+//		new Verifications() {{
+//			Calculator.checkForNull(2, 2);
+////			times=1;
+//			minTimes=1;
+//			maxTimes=3;
+//			calculator.performMathOperation("add", 2, 2);
+////			times=1;
+//			minTimes=1;
+//			maxTimes=3;
+//		}};
+		
+//		new VerificationsInOrder() {{
+//			Calculator.checkForNull(2, 2);
+//			times=1;
+//			calculator.performMathOperation("add", 2, 2);
+//			times=1;
+//		}};
+		
+		new FullVerifications() {{
+			calculator.performMathOperation("add", 2, 2);
+			times=1;
+//			Calculator.checkForNull(2, 2);
+//			times=1;
+		}};
 	}
+
+//	@Mocked
+//	Calculator calculator;
+//
+//	@Test
+//	@DisplayName("testExpectationsBlock")
+//	void testExpectationsBlock() {
+//		new Expectations(calculator) {
+//			{
+////				calculator.performMathOperation("add", 10, 10);
+////				result = 1;
+////				calculator.performMathOperation("add", 20, 20);
+////				result = 2;
+////				calculator.performMathOperation("add", 30, 30);
+////				result = 3;
+////				calculator.performMathOperation(anyString, anyDouble, anyDouble);
+////				result = 3;
+////				calculator.performMathOperation(anyString, anyDouble, anyDouble);
+////				returns(1.0 , 2.0 , 3.0);
+//				calculator.performMathOperation("add", anyDouble, anyDouble);
+//				result = new Delegate<Calculator>() {
+//					double performMathOperation(String operation, double a, double b) {
+//						double result = calculator.performMathOperation("sub", 20.0, 10.0);
+//						return result;
+//					}
+//				};
+//			}
+//		};
+//		double result1 = calculator.performMathOperation("add", 10.0, 10.0);
+//		assertTrue(result1 > 0);
+//		System.out.println("result1="+result1);
+//		
+////		double result2 = calculator.performMathOperation("add", 20.0, 20.0);
+////		assertTrue(result2 > 0);
+////		
+////		double result3 = calculator.performMathOperation("add", 30.0, 30.0);
+////		assertTrue(result3 > 0);
+//	}
 
 //	@Test
 //	@DisplayName("testStaticMethodMocking")
