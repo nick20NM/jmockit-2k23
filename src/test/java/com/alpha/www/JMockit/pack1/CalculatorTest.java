@@ -20,43 +20,54 @@ import mockit.VerificationsInOrder;
 
 public class CalculatorTest {
 	
-	@Mocked
+	@Tested
 	Calculator calculator;
 	
 	@Test
-	@DisplayName("testVerificationsBlock")
-	void testVerificationsBlock() {
-		
-		boolean checkForNull = Calculator.checkForNull(2, 2);
-		assertTrue(!checkForNull);
+	@DisplayName("testFakeAdditionClass")
+	void testFakeAdditionClass() {
+		new FakeAdditionClass();
 		double result = calculator.performMathOperation("add", 2, 2);
-		assertTrue(result==0);
-		
-//		new Verifications() {{
-//			Calculator.checkForNull(2, 2);
-////			times=1;
-//			minTimes=1;
-//			maxTimes=3;
-//			calculator.performMathOperation("add", 2, 2);
-////			times=1;
-//			minTimes=1;
-//			maxTimes=3;
-//		}};
-		
-//		new VerificationsInOrder() {{
-//			Calculator.checkForNull(2, 2);
-//			times=1;
-//			calculator.performMathOperation("add", 2, 2);
-//			times=1;
-//		}};
-		
-		new FullVerifications() {{
-			calculator.performMathOperation("add", 2, 2);
-			times=1;
-//			Calculator.checkForNull(2, 2);
-//			times=1;
-		}};
+		assertTrue(result > 0);
 	}
+	
+//	@Mocked
+//	Calculator calculator;
+//	
+//	@Test
+//	@DisplayName("testVerificationsBlock")
+//	void testVerificationsBlock() {
+//		
+//		boolean checkForNull = Calculator.checkForNull(2, 2);
+//		assertTrue(!checkForNull);
+//		double result = calculator.performMathOperation("add", 2, 2);
+//		assertTrue(result==0);
+//		
+////		new Verifications() {{
+////			Calculator.checkForNull(2, 2);
+//////			times=1;
+////			minTimes=1;
+////			maxTimes=3;
+////			calculator.performMathOperation("add", 2, 2);
+//////			times=1;
+////			minTimes=1;
+////			maxTimes=3;
+////		}};
+//		
+////		new VerificationsInOrder() {{
+////			Calculator.checkForNull(2, 2);
+////			times=1;
+////			calculator.performMathOperation("add", 2, 2);
+////			times=1;
+////		}};
+//		
+//		new FullVerifications() {{
+//			calculator.performMathOperation("add", 2, 2);
+//			times=1;
+////			Calculator.checkForNull(2, 2);
+////			times=1;
+//		}};
+//	}
 
 //	@Mocked
 //	Calculator calculator;
